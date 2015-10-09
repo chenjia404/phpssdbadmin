@@ -3,16 +3,27 @@ phpssdbadmin
 
 ## 安装
 
-编辑 `app/config/config.php`:
+编辑 `app/config/server.json`:
 
-	'servers' => array(
-		array(
-			'host' => '127.0.0.1',
-			'port' => '8888',
-		),
-	),
+	[
+      {
+    	"name":"db1",
+    	"host": "127.0.0.1",
+    	"port": "8888"
+      },
+      {
+    	"name":"db2",
+    	"host": "127.0.0.1",
+    	"port": "8889"
+      },
+      {
+    	"name":"db3",
+    	"host": "127.0.0.1",
+    	"port": "8890"
+      }
+    ]
 
-将 `host` 和 `port` 修改成正确的值.
+将 `host` 和 `port` 修改成正确的值,`name`用于解决ip加端口不易识别服务器的问题.
 
 然后编辑你的 Nginx 配置文件, 加入一条 URL 重写规则:
 
