@@ -1,6 +1,13 @@
 <?php
 define('ENV', 'online');
-
+if(file_exists('servers.json'))
+{
+    $servers = json_decode('servers.json',true);
+}
+else
+{
+    $servers = array();
+}
 return array(
 	'env' => ENV,
 	'logger' => array(
@@ -10,13 +17,7 @@ return array(
 			#'ALL'	=> dirname(__FILE__) . '/../../logs/' . date('Y-m') . '.log',
 		),
 	),
-	'servers' => array(
-		array(
-			'host' => '127.0.0.1',
-			'port' => '8888',
-			//'password' => '22222222',
-		),
-	),
+	'servers' => $servers,
 	'login' => array(
 		'name' => 'test',
 		'password' => '12345678', // at least 6 characters
