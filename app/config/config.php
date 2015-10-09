@@ -1,12 +1,13 @@
 <?php
 define('ENV', 'online');
-if(file_exists('servers.json'))
+$servers_json = __DIR__ . '/servers.json';
+if(file_exists($servers_json))
 {
-    $servers = json_decode('servers.json',true);
+	$servers = json_decode(file_get_contents($servers_json),true);
 }
 else
 {
-    $servers = array();
+	$servers = array();
 }
 return array(
 	'env' => ENV,
