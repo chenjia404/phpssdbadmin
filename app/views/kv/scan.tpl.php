@@ -1,4 +1,9 @@
 <h2>Type: KV</h2>
+<h2>
+    <a href="<?php echo _url('kv/scan', array('order'=>'asc'))?>">scan</a>
+    /
+    <a href="<?php echo _url('kv/scan', array('order'=>'desc'))?>">rscan</a>
+</h2>
 
 <div style="float: left;">
 	<a class="btn btn-xs btn-primary" href="<?php echo _url('kv/set')?>">

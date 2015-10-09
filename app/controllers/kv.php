@@ -18,21 +18,41 @@ class KvController extends BaseController
 		if($dir != 'prev'){
 			$dir = 'next';
 		}
+        $order = trim($_GET['order']);
+        if($order != 'asc'){
+            $order = 'desc';
+        }
 		
 		$ctx->s = $s;
 		$ctx->e = $e;
 		$ctx->dir = $dir;
 		$ctx->size = $size;
-		if($dir == 'prev'){
-			$ctx->kvs = $this->ssdb->rscan($s, $e, $size + 1);
-			$ctx->has_more = (count($ctx->kvs) == $size + 1);
-			$ctx->kvs = array_slice($ctx->kvs, 0, $size, true);
-			$ctx->kvs = array_reverse($ctx->kvs, true);
-		}else{
-			$ctx->kvs = $this->ssdb->scan($s, $e, $size + 1);
-			$ctx->has_more = (count($ctx->kvs) == $size + 1);
-			$ctx->kvs = array_slice($ctx->kvs, 0, $size, true);
-		}
+        if($order == 'asc'){
+            if($dir == 'prev'){
+                $ctx->kvs = $this->ssdb->rscan($s, $e, $size + 1);
+                $ctx->has_more = (count($ctx->kvs) == $size + 1);
+                $ctx->kvs = array_slice($ctx->kvs, 0, $size, true);
+                $ctx->kvs = array_reverse($ctx->kvs, true);
+            }else{
+                $ctx->kvs = $this->ssdb->scan($s, $e, $size + 1);
+                $ctx->has_more = (count($ctx->kvs) == $size + 1);
+                $ctx->kvs = array_slice($ctx->kvs, 0, $size, true);
+            }
+        }
+        else
+        {
+            if($dir == 'prev'){
+                $ctx->kvs = $this->ssdb->scan($s, $e, $size + 1);
+                $ctx->has_more = (count($ctx->kvs) == $size + 1);
+                $ctx->kvs = array_slice($ctx->kvs, 0, $size, true);
+                $ctx->kvs = array_reverse($ctx->kvs, true);
+            }else{
+                $ctx->kvs = $this->ssdb->rscan($s, $e, $size + 1);
+                $ctx->has_more = (count($ctx->kvs) == $size + 1);
+                $ctx->kvs = array_slice($ctx->kvs, 0, $size, true);
+            }
+        }
+
 		
 		$ttls = array();
 		foreach($ctx->kvs as $k=>$v){

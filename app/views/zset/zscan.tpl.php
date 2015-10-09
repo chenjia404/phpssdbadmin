@@ -1,4 +1,10 @@
-<h2>zscan: <a href="<?php echo _url('zset/zscan', array('n'=>$n))?>"><code><?php echo $n?></code></a></h2>
+<h2>
+    <a href="<?php echo _url('zset/zscan', array('n'=>$n, 'order'=>'asc'))?>">zscan</a>
+    /
+    <a href="<?php echo _url('zset/zscan', array('n'=>$n, 'order'=>'desc'))?>">zrscan</a>
+    :
+    <code><?php echo $n?></code></a>
+</h2>
 
 <div style="float: left;">
 	<a class="btn btn-xs btn-primary" href="<?php echo _url('zset/zset', array('n'=>$n))?>">
