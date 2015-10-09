@@ -24,6 +24,8 @@ class BaseController extends Controller
 		$confs = array();
 		foreach($servers as $s){
 			$k = "{$s['host']}:{$s['port']}";
+            if(isset($s['name']))
+                $k = $s['name'] . "($k)";
 			$confs[$k] = $s;
 		}
 		
